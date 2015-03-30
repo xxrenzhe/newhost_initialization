@@ -1,0 +1,43 @@
+---
+- name: updates | install common packages for CentOS6
+  yum: >
+     name={{ item }}
+     state=present
+  with_items:
+     - monit
+     - htop
+     - zip
+     - unzip
+     - iftop
+     - iptraf
+     - nethogs
+     - nload
+     - dstat
+     - glances
+     - tree
+     - strace
+     - lsof
+     - mtr
+  when : ansible_distribution_major_version == "6"
+  ignore_errors: yes
+
+
+- name: updates | install common packages for CentOS7
+  yum: >
+     name={{ item }}
+     state=present
+  with_items:
+     - monit
+     - htop
+     - zip
+     - unzip
+     - iftop
+     - iptraf
+     - nload
+     - dstat
+     - tree
+     - strace
+     - lsof
+     - mtr
+  when : ansible_distribution_major_version == "7"
+  ignore_errors: yes

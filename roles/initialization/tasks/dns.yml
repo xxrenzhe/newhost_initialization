@@ -1,0 +1,4 @@
+---
+# file: dns.yml
+- name: DNS for HK | Config DNS
+  copy: src=resolv-HK.conf dest=/etc/resolv.conf owner=root group=root mode=0644

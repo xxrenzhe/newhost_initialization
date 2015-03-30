@@ -1,0 +1,5 @@
+---
+# defaults file for role before-initialization
+
+deploy_user: "test"
+deploy_group: "test"

@@ -1,0 +1,14 @@
+---
+# file: package_directory.yml
+
+- name: package_directory | directory /home/{{ deploy_user }}/software
+  remote_user: {{ deploy_user }}
+  file: path=/home/{{ deploy_user }}/software owner={{ deploy_user }} group={{ deploy_user }} mode=0755 state=directory
+
+- name: package_directory | directory /home/{{ deploy_user }}/software/tar
+  remote_user: {{ deploy_user }}
+  file: path=/home/{{ deploy_user }}/software/tar owner={{ deploy_user }} group={{ deploy_user }} mode=0755 state=directory
+
+- name: package_directory | directory /home/{{ deploy_user }}/software/src
+  remote_user: {{ deploy_user }}
+  file: path=/home/{{ deploy_user }}/software/src owner={{ deploy_user }} group={{ deploy_user }} mode=0755 state=directory

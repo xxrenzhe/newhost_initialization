@@ -1,0 +1,4 @@
+# file: warn_msg.yml
+
+- name: Warning | Some message
+  debug: msg="You should deply hosts to all existed servers, ansible-playbook deploy_hosts.yml"

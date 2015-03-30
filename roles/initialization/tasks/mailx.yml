@@ -1,0 +1,12 @@
+---
+# file: mailx.yml
+- name: mailx | install mailx as a "mail client"
+  yum: name=mailx state=present 
+  ignore_errors: yes
+
+- name: mailx | copy the configuration file mail.rc
+  copy: src=mail.rc dest=/etc/mail.rc owner={{ deploy_user }} group={{ deploy_user }} mode=0644
+
+- name: mailx | test ok
+  shell: echo "`hostname`'s mailx is OK" | mailx -A zabbix -s "test for `hostname`" devops@{{ deploy_user }}100.com &>/dev/null
+  ignore_errors: yes

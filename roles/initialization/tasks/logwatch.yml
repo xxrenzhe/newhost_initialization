@@ -1,0 +1,10 @@
+---
+# file: logwatch.yml
+- name: logwatch | install logwatch
+  sudo: yes
+  yum: name=logwatch state=installed
+  ignore_errors: yes
+
+- name: logwatch | make logwatch mail daily
+  sudo: yes
+  lineinfile: dest=/etc/cron.daily/00logwatch regexp="^/usr/sbin/logwatch" line="/usr/sbin/logwatch high --print | mailx -A zabbix -s \"{{ logwatch_email_title}}\" {{ logwatch_email }} &>/dev/null" state=present create=yes mode=755

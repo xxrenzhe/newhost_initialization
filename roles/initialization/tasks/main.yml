@@ -1,0 +1,20 @@
+---
+# file: main.yml
+#
+- include: users.yml
+- include: hostname.yml
+- include: dns.yml
+- include: history.yml
+- include: charset.yml
+- include: alias.yml
+- include: selinux.yml
+- include: system.yml
+- include: updates.yml
+- include: package_directory.yml
+- include: mailx.yml
+- include: logwatch.yml
+- include: fail2ban.yml
+- include: iptables.yml
+- include: auth.yml
+- include: pip.yml
+- include: warn_msg.yml

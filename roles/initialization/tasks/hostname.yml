@@ -1,0 +1,16 @@
+---
+# file: hostname.yml
+- name: hostname | Change hostname for CentOS6
+  hostname: name={{ inventory_hostname }}
+  when : ansible_distribution_major_version == "6"
+  ignore_errors: yes
+
+- name: hostname | Change hostname for CentOS7
+  shell: sudo hostnamectl set-hostname {{ inventory_hostname }}
+  when : ansible_distribution_major_version == "7"
+  ignore_errors: yes
+
+- name: hostname | Change hostname for CentOS7
+  lineinfile: dest=/etc/sysconfig/network regexp="^HOSTNAME" line="HOSTNAME={{ inventory_hostname }}"
+  when : ansible_distribution_major_version == "7"
+  ignore_errors: yes

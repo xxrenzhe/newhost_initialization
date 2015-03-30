@@ -1,0 +1,10 @@
+# file: users.yml
+
+- name: users | set root  password
+  user: name=root password="{{ root_password  }}"
+
+- name: users | set deploy user password
+  user: name={{ deploy_user }} password="{{ deployuser_password }}"
+
+- name: users | copy ssh pub key to deployment user
+  authorized_key: user={{ deploy_user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}" state=present

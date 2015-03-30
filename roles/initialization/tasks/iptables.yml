@@ -1,0 +1,12 @@
+---
+# file: fail2ban.yml
+
+- name: iptables | Ensure iptables stopped for CentOS6
+  service: name=iptables state=stopped enabled=no
+  when : ansible_distribution_major_version == "6"
+  ignore_errors: yes
+
+- name: iptables | Ensure iptables stopped for CentOS7
+  service: name=firewalld state=stopped enabled=no
+  when : ansible_distribution_major_version == "7"
+  ignore_errors: yes

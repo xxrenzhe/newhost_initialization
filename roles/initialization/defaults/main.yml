@@ -1,0 +1,18 @@
+---
+# defaults file for role initialization
+
+# deploy group which will be used for ansible to deploy.
+deploy_group: test
+# deploy user which will be used for ansible to deploy. Has sudo rights without password
+deploy_user: test
+
+# root_password for console login as root
+root_password: '$6$FoRTliEn$NMHI7FI0j045oIXXbQtbdNgkA1FCWxYQ6YuJOuO8OC2qfT3zgFodwpQCVO/d1VJhhinjRuPl4PpatdwBA5Y3n/'
+deployuser_password: '$6$f5wAbKI4$GpEznJVJC8jFadgkx/JzWqQyh/ljk/zfOSGixCzmd9NCaEWX064fkC9WH6lAVS/06Bm5Zkg7yDb.UldON//2b/'
+
+# defaults for logwatch.yml
+logwatch_email_title: "logwatch for {{ ansible_hostname }}"
+logwatch_email: devops@test.com
+
+package_original_directory: /home/test/software/tar
+package_untar_directory: /home/test

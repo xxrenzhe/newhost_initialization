@@ -1,0 +1,14 @@
+---
+# file: alias.yml
+
+- name: alias | Prepare trash directory
+  file: path=/tmp/.trash state=directory owner=root group=root mode=0777
+
+- name: alias | Add cron to clean /tmp/.trash peroidly
+  cron: name="clean /tmp/.trash peroidly" minute="15" hour="2" job="/bin/find /tmp/.trash/* -mtime +1 -exec rm -rf {} \; &> /dev/null"
+
+- name: alias | Recoume aliases to forbidden some dangerous commands
+  copy: src=bash_profile dest=/home/{{ deploy_user }}/.bash_profile owner={{ deploy_user }} group={{ deploy_user }} mode=0644
+
+- name: alias | Set aliases to forbidden some dangerous commands
+  copy: src=alias.sh dest=/etc/profile.d/alias.sh owner=root group=root mode=0644

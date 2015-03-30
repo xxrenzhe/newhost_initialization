@@ -1,0 +1,32 @@
+---
+# file: main.yml
+- name: User | add group wenba
+  group: name={{ deploy_group }} state=present 
+  ignore_errors: yes
+
+- name: User | add user wenba
+  user: name={{ deploy_user }} group={{ deploy_group }} groups=wheel shell=/bin/bash comment="deploy user" generate_ssh_key=yes ssh_key_comment="wenba@{{ inventory_hostname }}" state=present 
+  ignore_errors: yes
+
+- name: User | add user wenba have sudo right
+  lineinfile: "dest=/etc/sudoers line='%wheel        ALL=(ALL)       NOPASSWD: ALL'  state=present"
+
+- name: User | enable sudoers.d
+  lineinfile: dest=/etc/sudoers regexp='^#includedir /etc/sudoers.d' line='#includedir /etc/sudoers.d' state=present
+
+- name: SSH-key | add some public keys to user wenba
+  authorized_key: user={{ deploy_user }} key="{{ item }}" state=present
+  with_file:
+    - ~/.ssh/id_rsa.pub
+    - jason-home
+    - jason-office
+
+- name: Auth | Ensure some directory owned by wenba
+  file: path="{{ item }}" state=directory owner={{ deploy_user }} group={{ deploy_group }} recurse=yes
+  with_items:
+    - "/home/wenba"
+    - "/data"
+
+- name: Auth | Change SSH port 22 to 9922
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^#Port 22" line="Port 9922" state=present
+  notify: restart ssh

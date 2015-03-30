@@ -1,0 +1,4 @@
+---
+# handlers file for before-initialization
+- name: restart ssh
+  service: name=sshd state=restarted enabled=yes

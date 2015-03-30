@@ -1,0 +1,5 @@
+---
+# file: history.yml
+
+- name: history | Add history time
+  copy: src=history.sh dest=/etc/profile.d/history.sh owner=root group=root mode=0644

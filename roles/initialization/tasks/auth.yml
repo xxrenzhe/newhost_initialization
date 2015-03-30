@@ -1,0 +1,18 @@
+---
+# file: auth.yml
+
+- name: auth | Disallow root SSH access
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
+  notify: restart ssh
+
+- name: auth | Allow PasswordAuthentication
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication yes" state=present
+  notify: restart ssh
+
+- name: auth | Disallow root SSH access
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^#PubkeyAuthentication" line="PubkeyAuthentication yes" state=present
+  notify: restart ssh
+
+- name: auth | Change SSH Client Connect port
+  lineinfile: dest=/etc/ssh/ssh_config insertafter="^Host" line="Port 9922" state=present
+  notify: restart ssh

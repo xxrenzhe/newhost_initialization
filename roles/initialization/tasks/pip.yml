@@ -1,0 +1,9 @@
+---
+# file: auth.yml
+
+- name: pip | Copy get-pip.py
+  copy: src=get-pip.py dest=/tmp/get-pip.py owner={{ deploy_user }} group={{ deploy_user }} mode=644
+
+- name: pip | Install pip(python package index)
+  shell: python get-pip.py chdir=/tmp creates="/usr/bin/pip"
+  ignore_errors: yes
