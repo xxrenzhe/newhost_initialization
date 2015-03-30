@@ -1,5 +1,7 @@
 # newhost_initialization
-initial new host 
+Function : initial new host  
+Author : Jason.Yu  
+CTime : 2015-03-31  
 
 
 Before Initialization
